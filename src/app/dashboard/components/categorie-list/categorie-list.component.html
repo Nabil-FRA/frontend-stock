@@ -1,0 +1,27 @@
+<div class="d-flex justify-content-between align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Catégories</h1>
+  <button type="button" class="btn btn-sm btn-outline-primary" routerLink="/dashboard/categories/nouveau">
+    ➕ Ajouter une Catégorie
+  </button>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of categories">
+        <td>{{ c.id }}</td>
+        <td>{{ c.nom }}</td>
+        <td>
+          <button class="btn btn-sm btn-outline-secondary me-2" [routerLink]="['/dashboard/categories/modifier', c.id]">Modifier</button>
+          <button class="btn btn-sm btn-outline-danger" (click)="deleteCategorie(c.id)">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

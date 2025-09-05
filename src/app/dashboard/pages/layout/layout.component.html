@@ -1,0 +1,45 @@
+<nav class="navbar navbar-dark bg-dark sticky-top flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">📦 Gestion de Stock</a>
+  <div class="navbar-nav">
+    <div class="nav-item text-nowrap">
+      <button class="nav-link px-3 btn btn-link" (click)="logout()">Déconnexion</button>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse vh-100">
+      <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/dashboard/produits" routerLinkActive="active">
+              Produits
+            </a>
+            <a class="nav-link" routerLink="/dashboard/fournisseurs" routerLinkActive="active">
+    Fournisseurs
+  </a>
+   <a class="nav-link" routerLink="/dashboard/categories" routerLinkActive="active">
+    Catégories
+  </a>
+
+  <a class="nav-link" routerLink="/dashboard/localisations" routerLinkActive="active">
+    Localisations
+  </a>
+  <a class="nav-link" routerLink="/dashboard/mouvements" routerLinkActive="active">
+    Mouvements
+  </a>
+  <a class="nav-link" routerLink="/dashboard/audit-logs" routerLinkActive="active">
+    Journal d'Audit
+  </a>
+
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
