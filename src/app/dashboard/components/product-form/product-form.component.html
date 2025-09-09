@@ -2,31 +2,38 @@
   <h1 class="h2">{{ isEditMode ? 'Modifier le Produit' : 'Ajouter un Produit' }}</h1>
 </div>
 
-<!-- CORRECTION : Les bindings du formulaire sont corrects -->
+<!-- Le formulaire est lié au code TypeScript via [formGroup] et (ngSubmit) -->
 <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+
   <div class="mb-3">
     <label for="nom" class="form-label">Nom</label>
     <input type="text" id="nom" class="form-control" formControlName="nom">
   </div>
+
   <div class="mb-3">
     <label for="reference" class="form-label">Référence</label>
     <input type="text" id="reference" class="form-control" formControlName="reference">
   </div>
+
   <div class="mb-3">
     <label for="seuil" class="form-label">Seuil d'alerte</label>
-    <!-- CORRECTION : 'formControlName' correspond au nom dans le .ts (camelCase) -->
+    <!-- Le 'formControlName' correspond bien à la propriété 'seuilDAlerte' du TypeScript -->
     <input type="number" id="seuil" class="form-control" formControlName="seuilDAlerte">
   </div>
+
   <div class="mb-3">
     <label for="categorieId" class="form-label">Catégorie</label>
-    <!-- CORRECTION : Utilisation d'un <select> pour une meilleure expérience utilisateur -->
+    <!-- CORRECTION : Remplacement de l'input par une liste déroulante (<select>) -->
     <select id="categorieId" class="form-select" formControlName="categorie">
       <option [ngValue]="null" disabled>Sélectionnez une catégorie</option>
+      <!-- La boucle *ngFor utilise la variable 'categories$' du TypeScript pour afficher les options -->
       <option *ngFor="let categorie of categories$ | async" [value]="categorie.id">
         {{ categorie.nom }}
       </option>
     </select>
   </div>
+
   <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">{{ isEditMode ? 'Mettre à jour' : 'Enregistrer' }}</button>
   <a routerLink="/dashboard/produits" class="btn btn-secondary ms-2">Annuler</a>
 </form>
+
