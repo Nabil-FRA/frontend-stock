@@ -1,5 +1,6 @@
 {
     "require": {
-        "nelmio/cors-bundle": "^2.5"
+        "nelmio/cors-bundle": "^2.5",
+        "doctrine/doctrine-fixtures-bundle": "^4.1"
     }
 }

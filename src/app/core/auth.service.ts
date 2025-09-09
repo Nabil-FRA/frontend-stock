@@ -15,17 +15,21 @@ export class AuthService {
     this._isLoggedIn$.next(!!token);
   }
 
+  // J'ajoute une fonction register pour être complet
+  register(credentials: {email: string, password: string}): Observable<any> {
+    // CORRECTION : Ajout de /api
+    return this.http.post(`${this.apiUrl}/api/users`, credentials);
+  }
+
   login(credentials: {username: string, password: string}): Observable<any> {
-    console.log('Appel de AuthService.login avec :', credentials);
-
-    return this.http.post(`${this.apiUrl}/login_check`, credentials).pipe(
+    // CORRECTION : Ajout de /api
+    return this.http.post(`${this.apiUrl}/api/login_check`, credentials).pipe(
       tap((response: any) => {
-        console.log('Réponse de login_check reçue :', response);
-        localStorage.setItem('auth_token', response.token);
-        this._isLoggedIn$.next(true);
-
-        // LA LIGNE CLÉ À AJOUTER pour le test de redirection
-        this.router.navigate(['/dashboard']);
+        if (response && response.token) {
+          localStorage.setItem('auth_token', response.token);
+          this._isLoggedIn$.next(true);
+          this.router.navigate(['/dashboard']);
+        }
       })
     );
   }
@@ -33,6 +37,6 @@ export class AuthService {
   logout() {
     localStorage.removeItem('auth_token');
     this._isLoggedIn$.next(false);
-    this.router.navigate(['/auth/login']); // Correction du chemin de déconnexion
+    this.router.navigate(['/auth/login']);
   }
 }
