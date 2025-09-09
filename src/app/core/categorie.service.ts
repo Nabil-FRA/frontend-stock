@@ -7,7 +7,8 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class CategorieService {
-  private apiUrl = `${environment.apiUrl}/categories`;
+  // CORRECTION : Ajout de /api
+  private apiUrl = `${environment.apiUrl}/api/categories`;
 
   constructor(private http: HttpClient) { }
 

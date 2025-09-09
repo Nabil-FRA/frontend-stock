@@ -5,8 +5,11 @@ import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AuditLogService {
-  private apiUrl = `${environment.apiUrl}/audit-logs`;
+  // CORRECTION : Ajout de /api
+  private apiUrl = `${environment.apiUrl}/api/audit-logs`;
+
   constructor(private http: HttpClient) { }
+
   getLogs(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }

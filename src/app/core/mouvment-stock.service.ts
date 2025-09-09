@@ -6,8 +6,9 @@ import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class MouvmentStockService {
-  private apiUrl = `${environment.apiUrl}/mouvements`;
+export class MouvementStockService { // CORRECTION : Typo
+  // CORRECTION : Ajout de /api
+  private apiUrl = `${environment.apiUrl}/api/mouvements`;
 
   constructor(private http: HttpClient) { }
 
