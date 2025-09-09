@@ -2,6 +2,7 @@
   <h1 class="h2">{{ isEditMode ? 'Modifier le Produit' : 'Ajouter un Produit' }}</h1>
 </div>
 
+<!-- CORRECTION : Les bindings du formulaire sont corrects -->
 <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
   <div class="mb-3">
     <label for="nom" class="form-label">Nom</label>
@@ -13,12 +14,19 @@
   </div>
   <div class="mb-3">
     <label for="seuil" class="form-label">Seuil d'alerte</label>
-    <input type="number" id="seuil" class="form-control" formControlName="seuil_d_alerte">
+    <!-- CORRECTION : 'formControlName' correspond au nom dans le .ts (camelCase) -->
+    <input type="number" id="seuil" class="form-control" formControlName="seuilDAlerte">
   </div>
-  <div class="mb-3" formGroupName="categorie">
-  <label for="categorieId" class="form-label">ID de la Catégorie</label>
-  <input type="number" id="categorieId" class="form-control" formControlName="id">
-</div>
+  <div class="mb-3">
+    <label for="categorieId" class="form-label">Catégorie</label>
+    <!-- CORRECTION : Utilisation d'un <select> pour une meilleure expérience utilisateur -->
+    <select id="categorieId" class="form-select" formControlName="categorie">
+      <option [ngValue]="null" disabled>Sélectionnez une catégorie</option>
+      <option *ngFor="let categorie of categories$ | async" [value]="categorie.id">
+        {{ categorie.nom }}
+      </option>
+    </select>
+  </div>
   <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">{{ isEditMode ? 'Mettre à jour' : 'Enregistrer' }}</button>
   <a routerLink="/dashboard/produits" class="btn btn-secondary ms-2">Annuler</a>
 </form>
